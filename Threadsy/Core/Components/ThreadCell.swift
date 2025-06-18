@@ -64,7 +64,7 @@ struct ThreadCell: View {
               }
 
             }
-            .foregroundColor(.black)
+            .foregroundStyle(Color.black)
             .padding(.vertical, 8)
 
           }

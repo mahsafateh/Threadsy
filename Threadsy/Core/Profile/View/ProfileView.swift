@@ -66,7 +66,7 @@ struct ProfileView: View {
                 
                 if selectedFilter == filter {
                   Rectangle()
-                    .foregroundColor(.black)
+                    .foregroundStyle(Color.black)
                     .frame(width: filterBarWidth, height: 1)
                     .matchedGeometryEffect(id: "item", in: animation)
                 }
