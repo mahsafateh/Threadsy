@@ -27,6 +27,7 @@ class AuthService {
         password: password
       )
       self.userSession = result.user
+      try await UserService.shared.fetchCurrentUser()
       print(
         "DEBUG: Logged in \(result.user.uid)"
       )
@@ -64,8 +65,11 @@ class AuthService {
   
   
   func signOut() {
-    try? Auth.auth().signOut()
-    self.userSession = nil
+    try? Auth.auth().signOut() // signs out on backend
+    
+    self.userSession = nil //removes session locally and updates souting
+    
+    UserService.shared.reset() //Sets current user object to nil
   }
   
   @MainActor
@@ -80,7 +84,7 @@ class AuthService {
     }
     try await Firestore.firestore().collection("users").document(id).setData(userData)
     
-    
+    UserService.shared.currentUser = user
   }
   
 }
